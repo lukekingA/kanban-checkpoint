@@ -131,6 +131,14 @@ export default new Vuex.Store({
         console.log(res)
         commit('getLists', res.data)
       })
+    },
+    addList({
+      commit,
+      dispatch
+    }, data) {
+      api.post('lists/boards/' + data.boardId, data.title).then(res => {
+        dispatch('getLists', data.boardId)
+      })
     }
     //#endregion
 

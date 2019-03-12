@@ -1,13 +1,13 @@
 <template>
-  <div class="list">
-    <div class="col">
-      <div>
-        <h5>{{listData.title}}</h5>
-        <span> <small>{{listData.createdAt | prettyDate}}</small></span>
-      </div>
-    </div>
 
+  <div class=" lists col col-sm-3">
+    <div>
+      <h5>{{listData.title}}</h5>
+      <span> <small>{{listData.createdAt | prettyDate}}</small></span>
+    </div>
   </div>
+
+
 </template>
 
 
