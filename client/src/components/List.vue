@@ -6,6 +6,8 @@
         <h5 class="d-inline-block border-bottom pb-1 pt-2">{{listData.title}}</h5>
         <button class="btn  " @click="deleteList(listData._id)"><i class="fas fa-trash-alt"></i></button>
       </div>
+      <task v-for="task in tasks"></task>
+
     </div>
   </div>
 
@@ -14,6 +16,7 @@
 
 
 <script>
+  import Task from '@/components/Task.vue'
   import moment from 'moment'
 
   export default {
@@ -41,7 +44,9 @@
         this.$store.dispatch('deleteList', data)
       }
     },
-    components: {}
+    components: {
+      Task
+    }
   }
 </script>
 

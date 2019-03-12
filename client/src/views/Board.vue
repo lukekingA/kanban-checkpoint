@@ -75,6 +75,7 @@
     components: {
       Banner,
       List
+
     }
   };
 </script>
