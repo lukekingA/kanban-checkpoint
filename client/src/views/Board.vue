@@ -1,12 +1,20 @@
 <template>
-  <div class="board">
-    {{board.title}}
+  <div class="board ">
+    <logout></logout>
+    <div class="row">
+      <div class="col bg-light rounded">
+        <h3 class="mb-1">{{board.title}}</h3>
+        <h5>{{board.description}}</h5>
+
+      </div>
+    </div>
 
     <list v-for="list in lists" :listData='list'></list>
   </div>
 </template>
 
 <script>
+  import Logout from '@/components/Logout.vue'
   export default {
     name: "board",
     computed: {
@@ -14,6 +22,9 @@
         return this.$store.state.boards.find(b => b._id == this.boardId) || { title: 'Loading...' }
       }
     },
-    props: ["boardId"]
+    props: ["boardId"],
+    components: {
+      Logout
+    }
   };
 </script>

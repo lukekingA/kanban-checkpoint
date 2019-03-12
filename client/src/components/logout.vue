@@ -1,5 +1,5 @@
 <template>
-  <div class="logout container fluid bg-dark text-light py-4 mb-3 rounded-bottom shadow">
+  <div class="logout bg-dark text-light py-4 mb-3 rounded-bottom shadow">
     <div class="row">
       <div class="col text-center">
         <h1>Kan-Task-Tic</h1>
@@ -12,29 +12,30 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </template>
 
 
 <script>
-  export default {
-    name: 'logout',
-    data() {
-      return {}
-    },
-    computed: {},
-    methods: {
-      logout() {
-        this.$store.dispatch('logout')
-      }
-    },
-    components: {}
-  }
+export default {
+  name: "logout",
+  data() {
+    return {};
+  },
+  computed: {},
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    }
+  },
+  components: {}
+};
 </script>
 
 
 <style scoped>
-
+@import url("https://fonts.googleapis.com/css?family=Fredoka+One");
+h1 {
+  font-family: "Fredoka One", cursive;
+}
 </style>
