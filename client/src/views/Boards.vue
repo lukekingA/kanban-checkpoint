@@ -1,5 +1,6 @@
 <template>
   <div class="boards">
+    <login></login>
     WELCOME TO THE BOARDS!!!
     <form @submit.prevent="addBoard">
       <input type="text" placeholder="title" v-model="newBoard.title" required>
@@ -14,12 +15,16 @@
 </template>
 
 <script>
+  let Import = require('@/components/Login.vue')
+
   export default {
     name: "boards",
     created() {
       //blocks users not logged in
       if (!this.$store.state.user._id) {
-        this.$router.push({ name: "login" });
+        this.$router.push({
+          name: "login"
+        });
       }
     },
     mounted() {
@@ -41,11 +46,17 @@
     methods: {
       addBoard() {
         this.$store.dispatch("addBoard", this.newBoard);
-        this.newBoard = { title: "", description: "" };
+        this.newBoard = {
+          title: "",
+          description: ""
+        };
       },
       deleteBoard(boardId) {
         this.$store.dispatch("deleteBoard", boardId);
       }
+    },
+    components: {
+      Login
     }
   };
 </script>
