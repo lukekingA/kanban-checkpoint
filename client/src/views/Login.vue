@@ -1,9 +1,11 @@
 <template>
   <div class="login">
-    <form v-if="loginForm" @submit.prevent="loginUser">
-      <input type="email" v-model="creds.email" placeholder="email">
-      <input type="password" v-model="creds.password" placeholder="password">
-      <button type="submit">Login</button>
+    <banner :home="home" :loginpage="loginpage"></banner>
+    <form class="d-flex align-items-baseline justify-content-center mb-3" v-if="loginForm" @submit.prevent="loginUser">
+      <input class="inputWidth pl-1 mr-1 rounded" type="email" v-model="creds.email" placeholder="email">
+      <input class="pl-1 ml-1 rounded" type="password" v-model="creds.password" placeholder="password">
+      <!-- <button type="submit">Login</button> -->
+      <button class="btn btn-sm bg-success text-light ml-2" type="submit">Login</button>
     </form>
     <form v-else @submit.prevent="register">
       <input type="text" v-model="newUser.name" placeholder="name">
@@ -20,6 +22,7 @@
 
 <script>
   import router from '@/router.js'
+  import Banner from '@/components/Banner.vue'
   export default {
     name: "login",
     data() {
@@ -33,7 +36,9 @@
           email: "",
           password: "",
           name: ""
-        }
+        },
+        home: true,
+        loginpage: true
       };
     },
     methods: {
@@ -43,6 +48,9 @@
       loginUser() {
         this.$store.dispatch("login", this.creds);
       }
+    },
+    components: {
+      Banner
     }
   };
 </script>
