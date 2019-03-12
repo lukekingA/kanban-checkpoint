@@ -55,7 +55,8 @@
       },
       deleteBoard(boardId) {
         this.$store.dispatch("deleteBoard", boardId);
-      }
+      },
+
     },
     components: {
       Banner

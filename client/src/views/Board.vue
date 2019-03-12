@@ -19,6 +19,8 @@
 
 <script>
   import Banner from '@/components/Banner.vue'
+  import List from '@/components/List.vue'
+
   export default {
     name: "board",
     computed: {
@@ -26,11 +28,18 @@
         return this.$store.state.boards.find(b => b._id == this.boardId) || {
           title: 'Loading...'
         }
+      },
+      lists() {
+        return this.$store.state.activeLists
       }
+    },
+    mounted() {
+      this.$store.dispatch('getLists', this.boardId)
     },
     props: ["boardId"],
     components: {
-      Banner
+      Banner,
+      List
     }
   };
 </script>
