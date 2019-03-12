@@ -11,7 +11,9 @@
       </div>
     </div>
 
-    <list v-for="list in lists" :listData='list'></list>
+    <div class="row">
+      <list v-for="list in lists" :listData='list'></list>
+    </div>
   </div>
 </template>
 
