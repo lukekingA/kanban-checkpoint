@@ -32,7 +32,7 @@ let task = new Schema({
     ref: 'User',
     required: true
   },
-  boardid: {
+  boardId: {
     type: ObjectId,
     ref: 'Board',
     required: true
