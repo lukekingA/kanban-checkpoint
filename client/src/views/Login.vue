@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <banner></banner>
+    <banner :home="home" :loginpage="loginpage"></banner>
     <form class="d-flex align-items-baseline justify-content-center mb-3" v-if="loginForm" @submit.prevent="loginUser">
       <input class="pl-1 rounded" type="email" v-model="creds.email" placeholder="email">
       <input class="pl-1 rounded" type="password" v-model="creds.password" placeholder="password">
@@ -36,7 +36,9 @@
           email: "",
           password: "",
           name: ""
-        }
+        },
+        home: true,
+        loginpage: true
       };
     },
     methods: {
