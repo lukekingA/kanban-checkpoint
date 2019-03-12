@@ -1,6 +1,6 @@
 <template>
   <div class="boards">
-    <login></login>
+    <logout></logout>
     WELCOME TO THE BOARDS!!!
     <form @submit.prevent="addBoard">
       <input type="text" placeholder="title" v-model="newBoard.title" required>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  let Import = require('@/components/Login.vue')
+  import Logout from '@/components/Logout.vue'
 
   export default {
     name: "boards",
@@ -56,7 +56,7 @@
       }
     },
     components: {
-      Login
+      Logout
     }
   };
 </script>
