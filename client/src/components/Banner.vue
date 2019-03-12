@@ -7,8 +7,9 @@
     </div>
     <div class="row">
       <div class="col col-sm-10 offset-sm-1">
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-between">
           <button class="btn btn-sm bg-danger text-light" @click="logout">Log Out</button>
+          <router-link v-if="!home" class="btn btn-sm bg-danger text-light" to="/">Back</router-link>
         </div>
       </div>
     </div>
@@ -28,6 +29,7 @@
         this.$store.dispatch("logout");
       }
     },
+    props: ['home'],
     components: {}
   };
 </script>

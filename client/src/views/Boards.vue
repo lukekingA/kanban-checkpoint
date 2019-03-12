@@ -1,6 +1,6 @@
 <template>
   <div class="boards">
-    <banner></banner>
+    <banner :home="home"></banner>
     <h4 class="mb-3">WELCOME TO THE BOARDS!!!</h4>
     <form class="d-flex align-items-baseline justify-content-center mb-3" @submit.prevent="addBoard">
       <input class="pl-1 rounded" type="text" placeholder="title" v-model="newBoard.title" required>
@@ -36,7 +36,8 @@
         newBoard: {
           title: "",
           description: ""
-        }
+        },
+        home: true
       };
     },
     computed: {

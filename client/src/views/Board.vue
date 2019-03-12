@@ -1,11 +1,13 @@
 <template>
   <div class="board ">
     <banner></banner>
-    <div class="row">
-      <div class="col bg-light rounded">
-        <h3 class="mb-1">{{board.title}}</h3>
-        <h5>{{board.description}}</h5>
+    <div class="bg-light rounded">
+      <div class="row">
+        <div class="col">
+          <h3 class="mb-1">{{board.title}}</h3>
+          <h5>{{board.description}}</h5>
 
+        </div>
       </div>
     </div>
 
