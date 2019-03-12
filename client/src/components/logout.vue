@@ -1,9 +1,14 @@
 <template>
-  <div class="logout container fluid">
+  <div class="logout container fluid bg-dark text-light py-4 mb-3 rounded-bottom shadow">
+    <div class="row">
+      <div class="col text-center">
+        <h1>Kan-Task-Tic</h1>
+      </div>
+    </div>
     <div class="row">
       <div class="col col-sm-10 offset-sm-1">
-        <div>
-          <button class="btn bg-danger text-light" @click="logout">Log Out</button>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-sm bg-danger text-light" @click="logout">Log Out</button>
         </div>
       </div>
     </div>

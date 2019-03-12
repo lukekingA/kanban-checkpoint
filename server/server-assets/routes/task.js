@@ -33,14 +33,15 @@ router.post('/lists/:id', (req, res, next) => {
 router.post('/:id', (req, res, next) => {
   req.body.authorId = req.session.uid
   Tasks.findById(req.params.id).then(task => {
-      task.comments.push(req.body)
-    }).then(() => {
-      res.send('Done')
+    task.comments.push(req.body)
+    task.save(err => {
+      if (err) {
+        res.status(400).send('failure to save task comment')
+      }
+      res.send('saved task comment')
     })
-    .catch(err => {
-      console.log(err)
-      next()
-    })
+  }).catch(next)
+
 })
 
 
