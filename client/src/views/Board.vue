@@ -1,6 +1,6 @@
 <template>
   <div class="board ">
-    <logout></logout>
+    <banner></banner>
     <div class="row">
       <div class="col bg-light rounded">
         <h3 class="mb-1">{{board.title}}</h3>
@@ -14,17 +14,19 @@
 </template>
 
 <script>
-  import Logout from '@/components/Logout.vue'
+  import Banner from '@/components/Banner.vue'
   export default {
     name: "board",
     computed: {
       board() {
-        return this.$store.state.boards.find(b => b._id == this.boardId) || { title: 'Loading...' }
+        return this.$store.state.boards.find(b => b._id == this.boardId) || {
+          title: 'Loading...'
+        }
       }
     },
     props: ["boardId"],
     components: {
-      Logout
+      Banner
     }
   };
 </script>

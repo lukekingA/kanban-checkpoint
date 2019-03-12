@@ -17,25 +17,26 @@
 
 
 <script>
-export default {
-  name: "logout",
-  data() {
-    return {};
-  },
-  computed: {},
-  methods: {
-    logout() {
-      this.$store.dispatch("logout");
-    }
-  },
-  components: {}
-};
+  export default {
+    name: "logout",
+    data() {
+      return {};
+    },
+    computed: {},
+    methods: {
+      logout() {
+        this.$store.dispatch("logout");
+      }
+    },
+    components: {}
+  };
 </script>
 
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Fredoka+One");
-h1 {
-  font-family: "Fredoka One", cursive;
-}
+  @import url("https://fonts.googleapis.com/css?family=Fredoka+One");
+
+  h1 {
+    font-family: "Fredoka One", cursive;
+  }
 </style>
