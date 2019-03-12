@@ -1,9 +1,11 @@
 <template>
 
-  <div class=" lists col col-sm-3">
-    <div>
-      <h5>{{listData.title}}</h5>
-      <span> <small>{{listData.createdAt | prettyDate}}</small></span>
+  <div class="h-100 lists col col-sm-3 px-2 mb-2">
+    <div class="bg-light h-100">
+      <div>
+        <h5 class="d-inline-block border-bottom pb-1 pt-2">{{listData.title}}</h5>
+        <button class="btn  " @click="deleteList(listData._id)"><i class="fas fa-trash-alt"></i></button>
+      </div>
     </div>
   </div>
 
@@ -29,8 +31,16 @@
         return moment(date).format('MM-DD-YY hh:mm')
       }
     },
-    props: ['listData'],
-    methods: {},
+    props: ['listData', 'boardId'],
+    methods: {
+      deleteList(id) {
+        let data = {
+          listId: id,
+          boardId: this.boardId
+        }
+        this.$store.dispatch('deleteList', data)
+      }
+    },
     components: {}
   }
 </script>

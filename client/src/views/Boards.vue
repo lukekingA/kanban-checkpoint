@@ -9,7 +9,8 @@
     </form>
     <div class="shadow rounded d-inline-block p-2 font-lg wboard ml-2 bg-light" v-for="board in boards"
       :key="board._id">
-      <router-link class="font-weight-bold" :to="{name: 'board', params: {boardId: board._id}}">{{board.title}}
+      <router-link class="font-weight-bold text-dark" :to="{name: 'board', params: {boardId: board._id}}">
+        {{board.title}}
       </router-link>
       <button class="btn  " @click="deleteBoard(board._id)"><i class="fas fa-trash-alt"></i></button>
     </div>

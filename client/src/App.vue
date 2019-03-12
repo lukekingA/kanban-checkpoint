@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid" id="app">
+  <div class="container-fluid h-100" id="app">
 
     <router-view />
   </div>
@@ -21,6 +21,7 @@
   html,
   body {
     background-color: rgb(238, 238, 238);
+    height: 100vh;
   }
 
   #app {

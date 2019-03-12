@@ -1,5 +1,5 @@
 <template>
-  <div class="board ">
+  <div class="board h-100 ">
     <banner></banner>
     <div class="bg-light rounded mb-3">
       <div class="row">
@@ -16,15 +16,16 @@
       <div class="row">
         <div class="col">
 
-          <form class="border-bottom mb-2 pb-1" @submit.prevent="addList(board._id)" action="">
+          <form class="d-flex align-content-center justify-content-center border-bottom mb-2 pb-1"
+            @submit.prevent="addList(board._id)" action="">
             <input class="pl-1 rounded" type="text" placeholder="list title" v-model="listTitle">
-            <button type="submit" class="btn btn-sm">Add List</button>
+            <button type="submit" class="btn bg-success text-light btn-sm ml-2">Add List</button>
           </form>
         </div>
       </div>
     </div>
-    <div class="row">
-      <list v-for="list in lists" :listData='list'></list>
+    <div class="row h-50">
+      <list v-for="list in lists" :listData="list" :boardId="boardId"></list>
     </div>
   </div>
 </template>
