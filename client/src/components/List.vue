@@ -37,11 +37,11 @@
     },
     computed: {
       tasks() {
-        return this.$store.state.activeTasks[this.listData._id]
+        return this.$store.state.activeTasks[this.listData._id] || []
       }
     },
     created() {
-      this.$store.dispatch('getTasks', this.listData._id)
+      // this.$store.dispatch('getTasks', this.listData._id)
     },
     filters: {
       prettyDate(date) {

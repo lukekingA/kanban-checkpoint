@@ -56,8 +56,11 @@
         return moment(date).format('MM-DD-YY hh:mm')
       }
     },
-    mounted() {
+    beforeCreate() {
       this.$store.dispatch('clearTasks')
+
+    },
+    mounted() {
       this.$store.dispatch('getLists', this.boardId)
     },
     methods: {

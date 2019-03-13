@@ -42,13 +42,15 @@ export default new Vuex.Store({
       state.activeTasks = {}
     },
     getTasks(state, data) {
-      data.forEach(task => {
-        let list = task.listId
-        if (!state.activeTasks[list]) {
-          state.activeTasks[list] = []
-        }
-        state.activeTasks[list].push(task)
-      })
+      // data.forEach(task => {
+      //   let list = task.listId
+      //   if (!state.activeTasks[list]) {
+      //     state.activeTasks[list] = []
+      //   }
+      //   state.activeTasks[list].push(task)
+      // })
+      //state.activeTasks[data.listId] = data.tasks
+      Vue.set(state.activeTasks, data.listId, data.tasks)
     }
   },
   actions: {
@@ -145,7 +147,11 @@ export default new Vuex.Store({
       dispatch
     }, id) {
       api.get('lists/boards/' + id).then(res => {
+        //debugger
         commit('getLists', res.data)
+        res.data.forEach(list => {
+          dispatch('getTasks', list._id)
+        })
       })
     },
     addList({
@@ -179,7 +185,10 @@ export default new Vuex.Store({
       dispatch
     }, id) {
       api.get('tasks/lists/' + id).then(res => {
-        commit('getTasks', res.data)
+        commit('getTasks', {
+          listId: id,
+          tasks: res.data
+        })
       })
     },
     addTask({
