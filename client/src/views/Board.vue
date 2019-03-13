@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="row h-50">
-      <list v-for="list in lists" :listData="list" :boardId="boardId"></list>
+      <list v-for="list in lists" :listData="list" :boardId="boardId" :key="list._id"></list>
     </div>
   </div>
 </template>
