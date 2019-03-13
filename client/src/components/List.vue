@@ -1,7 +1,7 @@
 <template>
 
   <div class="h-100 lists col col-sm-3 px-2 mb-2">
-    <div class="bg-light h-100">
+    <div class="bg-light h-100 overflow-auto">
       <div>
         <button class="btn btn-sm bg-success text-light mr-2 py-0" @click="showTaskForm = !showTaskForm"><small>New
             Task</small></button>
