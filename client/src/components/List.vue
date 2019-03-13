@@ -25,9 +25,12 @@
       return {}
     },
     computed: {
-      lists() {
-        return
+      tasks() {
+        return this.$store.state.activeTasks
       }
+    },
+    mounted() {
+      this.$store.dispatch('getTasks', this.listData._id)
     },
     filters: {
       prettyDate(date) {

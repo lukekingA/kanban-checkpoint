@@ -22,7 +22,8 @@ export default new Vuex.Store({
     user: {},
     boards: [],
     activeBoard: {},
-    activeLists: []
+    activeLists: [],
+    activeTasks: {}
   },
   mutations: {
     setUser(state, user) {
@@ -36,6 +37,10 @@ export default new Vuex.Store({
     },
     getLists(state, data) {
       state.activeLists = data
+    },
+    getTasks(state, data) {
+      let list = data.listId
+      state.activeTasks[list] = data
     }
   },
   actions: {
@@ -123,6 +128,10 @@ export default new Vuex.Store({
           dispatch('getBoards')
         })
     },
+    //#endregion
+
+
+    //#region -- LISTS --
     getLists({
       commit,
       dispatch
@@ -140,18 +149,25 @@ export default new Vuex.Store({
         dispatch('getLists', data.boardId)
       })
     },
-    deleteList({ commit, dispatch }, data) {
+    deleteList({
+      commit,
+      dispatch
+    }, data) {
       api.delete('lists/' + data.listId).then(res => {
         dispatch('getLists', data.boardId)
       })
+    },
+
+
+    //#endregion
+    getTasks({
+      commit,
+      dispatch
+    }, id) {
+      api.get('tasks/' + id).then(res => {
+        debugger
+        commit('getTasks', res.data)
+      })
     }
-    //#endregion
-
-
-    //#region -- LISTS --
-
-
-
-    //#endregion
   }
 })

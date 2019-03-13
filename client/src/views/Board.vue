@@ -16,8 +16,8 @@
       <div class="row">
         <div class="col">
 
-          <form class="d-flex align-content-center justify-content-center border-bottom mb-2 pb-1"
-            @submit.prevent="addList(board._id)" action="">
+          <form class="d-flex align-content-center justify-content-center border-bottom mb-2 pb-1" @submit.prevent="addList(board._id)"
+            action="">
             <input class="pl-1 rounded" type="text" placeholder="list title" v-model="listTitle">
             <button type="submit" class="btn bg-success text-light btn-sm ml-2">Add List</button>
           </form>
@@ -57,6 +57,7 @@
       }
     },
     mounted() {
+      this.$store.dispatch('clearTasks')
       this.$store.dispatch('getLists', this.boardId)
     },
     methods: {
