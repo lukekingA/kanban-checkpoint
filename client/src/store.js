@@ -174,6 +174,8 @@ export default new Vuex.Store({
 
     //#endregion
 
+
+    //#region -- Tasks --
     clearTasks({
       commit
     }) {
@@ -211,6 +213,14 @@ export default new Vuex.Store({
       commit, dispatch
     }, data) {
       api.put('tasks/' + data.taskId, data.description).then(res => {
+        dispatch('getTasks', data.listId)
+      })
+    },
+
+    //#endregion
+
+    addComment({ commit, dispatch }, data) {
+      api.post('tasks/' + data.taskId, data.comment).then(res => {
         dispatch('getTasks', data.listId)
       })
     }

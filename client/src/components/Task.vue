@@ -22,8 +22,9 @@
 
       </div>
       <div v-show="showCommentForm">
-        <form @submit.prevent="addComment(task._id)">
+        <form @submit.prevent="addComment(task)">
           <input class="rounded pl-1" type="text" v-model="comment" placeholder="Comment">
+          <button type="submit">submit</button>
         </form>
 
       </div>
@@ -68,6 +69,17 @@
         this.$store.dispatch('editTask', data)
         this.taskDescription = ''
         this.showEditForm = false
+      },
+      addComment(task) {
+        let data = {
+          taskId: task._id,
+          listId: task.listId,
+          comment: { content: this.comment }
+        }
+        debugger
+        this.$store.dispatch('addComment', data)
+        this.comment = ''
+        this.showCommentForm = false
       }
     }
   };
