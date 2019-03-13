@@ -28,6 +28,11 @@
         </form>
 
       </div>
+      <div>
+        <div class="ml-5" v-for="comment in task.comments">
+          <p class="pl-2 py-1 ml-5 bg-white rounded shadow-sm text-left">{{comment.content}}</p>
+        </div>
+      </div>
     </div>
 
 
@@ -76,7 +81,6 @@
           listId: task.listId,
           comment: { content: this.comment }
         }
-        debugger
         this.$store.dispatch('addComment', data)
         this.comment = ''
         this.showCommentForm = false
