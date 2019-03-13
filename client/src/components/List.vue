@@ -14,7 +14,7 @@
           <button type="submit" class="btn btn-sm bg-success text-light ml-2">Add</button>
         </form>
       </div>
-      <task v-for="task in tasks" :task="task" :key="task._id"></task>
+      <task :tasks="tasks"></task>
 
     </div>
   </div>
@@ -40,7 +40,7 @@
         return this.$store.state.activeTasks[this.listData._id]
       }
     },
-    mounted() {
+    created() {
       this.$store.dispatch('getTasks', this.listData._id)
     },
     filters: {

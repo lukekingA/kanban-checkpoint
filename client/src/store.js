@@ -145,7 +145,6 @@ export default new Vuex.Store({
       dispatch
     }, id) {
       api.get('lists/boards/' + id).then(res => {
-        console.log(res)
         commit('getLists', res.data)
       })
     },
