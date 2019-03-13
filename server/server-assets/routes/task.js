@@ -68,9 +68,13 @@ router.delete('/:taskId/comment/:commentId', (req, res, next) => {
     let comment = task.comments.find(c => c._id == req.params.commentId)
     if (comment) {
       task.comments.splice(task.comments.indexOf(comment), 1)
+      task.save()
     }
   }).then(comment => {
-    res.send('Comment Deleted')
+    res.send({
+      message: 'Comment Deleted',
+      data: comment
+    })
   }).catch(err => {
     res.status(400).send('ACCESS DENIED; Invalid Request')
   })
