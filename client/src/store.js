@@ -38,9 +38,17 @@ export default new Vuex.Store({
     getLists(state, data) {
       state.activeLists = data
     },
+    clearTasks(state) {
+      state.activeTasks = {}
+    },
     getTasks(state, data) {
-      let list = data.listId
-      state.activeTasks[list] = data
+      data.forEach(task => {
+        let list = task.listId
+        if (!state.activeTasks[list]) {
+          state.activeTasks[list] = []
+        }
+        state.activeTasks[list].push(task)
+      })
     }
   },
   actions: {
@@ -160,13 +168,27 @@ export default new Vuex.Store({
 
 
     //#endregion
+
+    clearTasks({
+      commit
+    }) {
+      commit('clearTasks')
+    },
+
     getTasks({
       commit,
       dispatch
     }, id) {
-      api.get('tasks/' + id).then(res => {
-        debugger
+      api.get('tasks/lists/' + id).then(res => {
         commit('getTasks', res.data)
+      })
+    },
+    addTask({
+      commit,
+      dispatch
+    }, data) {
+      api.post('tasks/lists/' + data.listId, data.data).then(res => {
+        dispatch('getTasks', data.listId)
       })
     }
   }

@@ -3,10 +3,18 @@
   <div class="h-100 lists col col-sm-3 px-2 mb-2">
     <div class="bg-light h-100">
       <div>
+        <button class="btn btn-sm bg-success text-light mr-2 py-0" @click="showTaskForm = !showTaskForm"><small>New
+            Task</small></button>
         <h5 class="d-inline-block border-bottom pb-1 pt-2">{{listData.title}}</h5>
         <button class="btn  " @click="deleteList(listData._id)"><i class="fas fa-trash-alt"></i></button>
       </div>
-      <task v-for="task in tasks"></task>
+      <div v-show="showTaskForm">
+        <form class="d-flex align-content-center justify-content-center" @submit.prevent="addTask(listData._id)">
+          <input class="pl-1 rounded" type="text" v-model="taskDescription" placeholder="task description">
+          <button type="submit" class="btn btn-sm bg-success text-light ml-2">Add</button>
+        </form>
+      </div>
+      <task v-for="task in tasks" :listId="listData._id"></task>
 
     </div>
   </div>
@@ -22,7 +30,10 @@
   export default {
     name: 'list',
     data() {
-      return {}
+      return {
+        taskDescription: '',
+        showTaskForm: false
+      }
     },
     computed: {
       tasks() {
@@ -45,6 +56,18 @@
           boardId: this.boardId
         }
         this.$store.dispatch('deleteList', data)
+      },
+      addTask(id) {
+        let data = {
+          listId: id,
+          data: {
+            description: this.taskDescription,
+            boardId: this.boardId
+          }
+        }
+        this.$store.dispatch('addTask', data)
+        this.showTaskForm = false
+        this.taskDescription = ''
       }
     },
     components: {
