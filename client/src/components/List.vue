@@ -14,7 +14,7 @@
           <button type="submit" class="btn btn-sm bg-success text-light ml-2">Add</button>
         </form>
       </div>
-      <task :tasks="tasks"></task>
+      <task :task="task" v-for="task in tasks" :key="task._id"></task>
 
     </div>
   </div>
