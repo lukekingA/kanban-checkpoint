@@ -1,5 +1,5 @@
 <template>
-  <div class="logout bg-dark text-light py-4 mb-3 rounded-bottom shadow">
+  <div class="logout bg-dark text-light py-4 mb-3 rounded-bottom shadow fixed-top">
     <div class="row">
       <div class="col text-center">
         <h1>Kan-Task-Tic</h1>

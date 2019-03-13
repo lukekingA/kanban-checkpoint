@@ -49,4 +49,8 @@
   .fa-trash-alt {
     color: rgb(177, 177, 177);
   }
+
+  .page-top-margin {
+    margin-top: 150px;
+  }
 </style>
