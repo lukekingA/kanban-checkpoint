@@ -40,9 +40,6 @@
         return this.$store.state.activeTasks[this.listData._id] || []
       }
     },
-    created() {
-      // this.$store.dispatch('getTasks', this.listData._id)
-    },
     filters: {
       prettyDate(date) {
         return moment(date).format('MM-DD-YY hh:mm')

@@ -4,7 +4,7 @@
       <button class="btn btn-sm bg-secondary text-light mr-2 py-0"
         @click="showTaskForm = !showTaskForm"><small>Comment</small></button>
       <h6 class="border-dark rounded m-1 p-1">{{task.description}}</h6>
-      <button class="btn  " @click="deleteTask(task._id)"><small><i class="fas fa-trash-alt"></i></small></button>
+      <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i class="fas fa-trash-alt"></i></small></button>
     </div>
   </div>
 </template>
@@ -25,8 +25,12 @@
     },
     props: ['tasks'],
     methods: {
-      deleteTask(id) {
-        // write this function
+      deleteTask(id, listId) {
+        let data = {
+          taskId: id,
+          listId: listId
+        }
+        this.$store.dispatch('deleteTask', data)
       }
     }
   };
