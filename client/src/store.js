@@ -223,6 +223,12 @@ export default new Vuex.Store({
       api.post('tasks/' + data.taskId, data.comment).then(res => {
         dispatch('getTasks', data.listId)
       })
+    },
+    deleteComment({ dispatch }, data) {
+      api.delete('tasks/' + data.taskId + '/comment/' + data.commentId).then(res => {
+        debugger
+        dispatch('getTasks', data.listId)
+      })
     }
   }
 })

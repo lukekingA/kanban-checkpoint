@@ -45,4 +45,8 @@
   #nav a.router-link-exact-active {
     color: #42b983;
   }
+
+  .fa-trash-alt {
+    color: rgb(177, 177, 177);
+  }
 </style>

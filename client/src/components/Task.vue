@@ -4,12 +4,14 @@
     <div>
       <div class="d-flex justify-content-between bg-white border-light border-bottom m-2">
         <div class="d-flex justify-content-start">
-          <button class="btn ml-2 py-0 my-2 text-success" @click="showEditForm = !showEditForm"><small><i
-                class="far fa-edit"></i></small></button>
+          <div class="">
+            <button class="btn ml-2 py-0 my-1" @click="showEditForm = !showEditForm"><small><i
+                  class="fas fa-edit"></i></small></button>
+          </div>
           <div class="text-left">
             <h6 class="border-dark rounded m-1 mb-0 p-1">{{task.description}}</h6>
-            <button class="btn ml-2 py-0 my-1 bg-success text-light"
-              @click="showCommentForm = !showCommentForm">Comment</button>
+            <button class="btn ml-2 py-0 my-1 border-success text-success"
+              @click="showCommentForm = !showCommentForm"><i class="fas fa-clipboard-list"></i></button>
           </div>
         </div>
         <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i
@@ -24,13 +26,15 @@
       <div v-show="showCommentForm">
         <form @submit.prevent="addComment(task)">
           <input class="rounded pl-1" type="text" v-model="comment" placeholder="Comment">
-          <button type="submit">submit</button>
         </form>
 
       </div>
       <div>
-        <div class="ml-5" v-for="comment in task.comments">
-          <p class="pl-2 py-1 ml-5 bg-white rounded shadow-sm text-left">{{comment.content}}</p>
+        <div class="d-flex bg-white rounded shadow-sm justify-content-between ml-5 my-2 mr-2"
+          v-for="comment in task.comments">
+          <p class="pl-2 py-1 text-left">{{comment.content}}</p>
+          <button class="btn mr-1" @click="deleteComment(task._id, task.listId, comment._id)"><small><i
+                class="fas fa-trash-alt"></i></small></button>
         </div>
       </div>
     </div>
@@ -84,6 +88,14 @@
         this.$store.dispatch('addComment', data)
         this.comment = ''
         this.showCommentForm = false
+      },
+      deleteComment(taskId, listId, commentId) {
+        let data = {
+          taskId: taskId,
+          listId: listId,
+          commentId: commentId
+        }
+        this.$store.dispatch('deleteComment', data)
       }
     }
   };
