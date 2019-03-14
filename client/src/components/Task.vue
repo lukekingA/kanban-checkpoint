@@ -38,7 +38,7 @@
 
       </div>
       <div>
-        <div class="d-flex bg-white rounded shadow-sm justify-content-between ml-5 my-2 mr-2"
+        <div :class="comStyle" class="d-flex rounded shadow-sm justify-content-between ml-5 my-2 mr-2"
           v-for="comment in task.comments">
           <p class="pl-2 py-1 text-left">{{comment.content}}</p>
           <button class="btn mr-1" @click="deleteComment(task._id, task.listId, comment._id)"><small><i
@@ -73,6 +73,12 @@
           return 'tsk-complete'
         }
         return 'bg-light'
+      },
+      comStyle() {
+        if (this.task.completed) {
+          return 'tsk-complete'
+        }
+        return 'bg-white'
       }
     },
     props: ['task'],
