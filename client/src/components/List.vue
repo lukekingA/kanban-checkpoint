@@ -2,10 +2,7 @@
   <div class="h-100 lists col col-sm-3 px-2 mb-2">
     <div class="bg-light h-100 overflow-auto">
       <div>
-        <button
-          class="btn btn-sm bg-success text-light mr-2 py-0"
-          @click="showTaskForm = !showTaskForm"
-        >
+        <button class="btn btn-sm bg-success text-light mr-2 py-0" @click="visTaskForm">
           <small>New Task</small>
         </button>
         <h5 class="d-inline-block border-bottom pb-1 pt-2">
@@ -16,16 +13,8 @@
         </button>
       </div>
       <div v-show="showTaskForm">
-        <form
-          class="d-flex align-content-center justify-content-center"
-          @submit.prevent="addTask(listData._id)"
-        >
-          <input
-            class="pl-1 rounded"
-            type="text"
-            v-model="taskDescription"
-            placeholder="task description"
-          />
+        <form class="d-flex align-content-center justify-content-center" @submit.prevent="addTask(listData._id)">
+          <input class="pl-1 rounded" ref="taskForm" type="text" v-model="taskDescription" placeholder="task description" />
           <button type="submit" class="btn btn-sm bg-success text-light ml-2">
             Add
           </button>
@@ -78,6 +67,12 @@
         this.$store.dispatch("addTask", data);
         this.showTaskForm = false;
         this.taskDescription = "";
+      },
+      visTaskForm() {
+        this.showTaskForm = !this.showTaskForm
+        this.$nextTick(function () {
+          this.$refs.taskForm.focus()
+        })
       }
     },
     components: {
