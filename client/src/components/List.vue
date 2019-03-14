@@ -20,6 +20,7 @@
           </button>
         </form>
       </div>
+      <drop class="drop" @drop="handleDrop"></drop>
       <task :task="task" v-for="task in tasks" :key="task._id"></task>
     </div>
   </div>
@@ -28,6 +29,10 @@
 <script>
   import Task from "@/components/Task.vue";
   import moment from "moment";
+  import {
+    Drag,
+    Drop
+  } from 'vue-drag-drop'
 
   export default {
     name: "list",
@@ -73,10 +78,19 @@
         this.$nextTick(function () {
           this.$refs.taskForm.focus()
         })
+      },
+      handleDrop(data) {
+        let newData = {
+          newListId: this.listData._id,
+          task: data
+        }
+        this.$store.dispatch('taskDrop', newData)
       }
     },
     components: {
-      Task
+      Task,
+      Drag,
+      Drop
     }
   };
 </script>
