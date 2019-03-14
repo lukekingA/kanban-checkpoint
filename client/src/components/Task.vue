@@ -7,12 +7,11 @@
         <div class="d-flex justify-content-between bg-white border-light border-bottom m-2">
           <div class="d-flex justify-content-start">
             <div class="">
-              <button class="btn ml-2 py-0 my-1" @click="showEditForm = !showEditForm"><small><i class="fas fa-edit"></i></small></button>
+              <button class="btn ml-2 py-0 my-1" @click="visEditForm"><small><i class="fas fa-edit"></i></small></button>
             </div>
             <div class="text-left">
               <h6 class="border-dark rounded m-1 mb-0 p-1">{{task.description}}</h6>
-              <button class="btn ml-2 py-0 my-1 border-success text-success" @click="showCommentForm = !showCommentForm"><i
-                  class="fas fa-clipboard-list"></i></button>
+              <button class="btn ml-2 py-0 my-1 border-success text-success" @click="visComForm"><i class="fas fa-clipboard-list"></i></button>
             </div>
           </div>
           <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i class="fas fa-trash-alt"></i></small></button>
@@ -21,13 +20,13 @@
       <drop class="drop" @drop="handleDrop"></drop>
       <div v-show="showEditForm">
         <form @submit.prevent="editTask(task)">
-          <input class="rounded pl-1" type="text" v-model="taskDescription" placeholder="task description">
+          <input class="rounded pl-1" ref="editForm" type="text" v-model="taskDescription" placeholder="task description">
         </form>
 
       </div>
       <div v-show="showCommentForm">
         <form @submit.prevent="addComment(task)">
-          <input class="rounded pl-1" type="text" v-model="comment" placeholder="Comment">
+          <input class="rounded pl-1" ref="comForm" type="text" v-model="comment" placeholder="Comment">
         </form>
 
       </div>
@@ -114,6 +113,18 @@
           task: data
         }
         this.$store.dispatch('taskDrop', newData)
+      },
+      visComForm() {
+        this.showCommentForm = !this.showCommentForm
+        this.$nextTick(function () {
+          this.$refs.comForm.focus()
+        })
+      },
+      visEditForm() {
+        this.showEditForm = !this.showEditForm
+        this.$nextTick(function () {
+          this.$refs.editForm.focus()
+        })
       }
     }
   };
