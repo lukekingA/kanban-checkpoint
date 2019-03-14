@@ -5,17 +5,15 @@
       <div class="d-flex justify-content-between bg-white border-light border-bottom m-2">
         <div class="d-flex justify-content-start">
           <div class="">
-            <button class="btn ml-2 py-0 my-1" @click="showEditForm = !showEditForm"><small><i
-                  class="fas fa-edit"></i></small></button>
+            <button class="btn ml-2 py-0 my-1" @click="showEditForm = !showEditForm"><small><i class="fas fa-edit"></i></small></button>
           </div>
           <div class="text-left">
             <h6 class="border-dark rounded m-1 mb-0 p-1">{{task.description}}</h6>
-            <button class="btn ml-2 py-0 my-1 border-success text-success"
-              @click="showCommentForm = !showCommentForm"><i class="fas fa-clipboard-list"></i></button>
+            <button class="btn ml-2 py-0 my-1 border-success text-success" @click="showCommentForm = !showCommentForm"><i
+                class="fas fa-clipboard-list"></i></button>
           </div>
         </div>
-        <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i
-              class="fas fa-trash-alt"></i></small></button>
+        <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i class="fas fa-trash-alt"></i></small></button>
       </div>
       <div v-show="showEditForm">
         <form @submit.prevent="editTask(task)">
@@ -30,11 +28,9 @@
 
       </div>
       <div>
-        <div class="d-flex bg-white rounded shadow-sm justify-content-between ml-5 my-2 mr-2"
-          v-for="comment in task.comments">
+        <div class="d-flex bg-white rounded shadow-sm justify-content-between ml-5 my-2 mr-2" v-for="comment in task.comments">
           <p class="pl-2 py-1 text-left">{{comment.content}}</p>
-          <button class="btn mr-1" @click="deleteComment(task._id, task.listId, comment._id)"><small><i
-                class="fas fa-trash-alt"></i></small></button>
+          <button class="btn mr-1" @click="deleteComment(task._id, task.listId, comment._id)"><small><i class="fas fa-trash-alt"></i></small></button>
         </div>
       </div>
     </div>
@@ -44,6 +40,11 @@
 </template>
 
 <script>
+  import {
+    Drag,
+    Drop
+  } from 'vue-drag-drop'
+
   export default {
     name: "tasks",
     data() {
@@ -54,13 +55,13 @@
         comment: ''
       };
     },
-    mounted() {
-
-    },
     computed: {
 
     },
     props: ['task'],
+    components: {
+
+    },
     methods: {
       deleteTask(id, listId) {
         let data = {
@@ -71,7 +72,9 @@
       },
       editTask(task) {
         let data = {
-          description: { description: this.taskDescription },
+          description: {
+            description: this.taskDescription
+          },
           taskId: task._id,
           listId: task.listId
         }
@@ -83,7 +86,9 @@
         let data = {
           taskId: task._id,
           listId: task.listId,
-          comment: { content: this.comment }
+          comment: {
+            content: this.comment
+          }
         }
         this.$store.dispatch('addComment', data)
         this.comment = ''
