@@ -13,7 +13,7 @@ let auth = Axios.create({
 
 let api = Axios.create({
   baseURL: "//localhost:3000/api/",
-  timeout: 3000,
+  timeout: 6000,
   withCredentials: true
 })
 
@@ -147,7 +147,6 @@ export default new Vuex.Store({
       dispatch
     }, id) {
       api.get('lists/boards/' + id).then(res => {
-        //debugger
         commit('getLists', res.data)
         res.data.forEach(list => {
           dispatch('getTasks', list._id)
@@ -210,23 +209,40 @@ export default new Vuex.Store({
       })
     },
     editTask({
-      commit, dispatch
+      commit,
+      dispatch
     }, data) {
       api.put('tasks/' + data.taskId, data.description).then(res => {
         dispatch('getTasks', data.listId)
       })
     },
+    taskDrop({
+      commit,
+      dispatch
+    }, newData) {
+      let data = {
+        listId: newData.newListId
+      }
+      api.put('tasks/' + newData.task._id, data).then(res => {
+        dispatch('getLists', newData.task.boardId)
+      })
+    },
 
     //#endregion
 
-    addComment({ commit, dispatch }, data) {
+    addComment({
+      commit,
+      dispatch
+    }, data) {
       api.post('tasks/' + data.taskId, data.comment).then(res => {
         dispatch('getTasks', data.listId)
       })
     },
-    deleteComment({ dispatch }, data) {
+    deleteComment({
+      dispatch
+    }, data) {
       api.delete('tasks/' + data.taskId + '/comment/' + data.commentId).then(res => {
-        debugger
+
         dispatch('getTasks', data.listId)
       })
     }

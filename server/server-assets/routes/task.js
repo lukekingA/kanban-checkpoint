@@ -54,10 +54,11 @@ router.put('/:id', (req, res, next) => {
     task.update(req.body, (err) => {
       if (err) {
         console.log(err)
-        next()
+        res.status(400).send('failure to update task')
       }
+      res.send('Successfully updated task')
     })
-  })
+  }).catch(next)
 
 })
 

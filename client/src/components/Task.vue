@@ -2,19 +2,23 @@
   <div class="tasks">
 
     <div>
-      <div class="d-flex justify-content-between bg-white border-light border-bottom m-2">
-        <div class="d-flex justify-content-start">
-          <div class="">
-            <button class="btn ml-2 py-0 my-1" @click="showEditForm = !showEditForm"><small><i class="fas fa-edit"></i></small></button>
+
+      <drag class="drag" :transfer-data="task">
+        <div class="d-flex justify-content-between bg-white border-light border-bottom m-2">
+          <div class="d-flex justify-content-start">
+            <div class="">
+              <button class="btn ml-2 py-0 my-1" @click="showEditForm = !showEditForm"><small><i class="fas fa-edit"></i></small></button>
+            </div>
+            <div class="text-left">
+              <h6 class="border-dark rounded m-1 mb-0 p-1">{{task.description}}</h6>
+              <button class="btn ml-2 py-0 my-1 border-success text-success" @click="showCommentForm = !showCommentForm"><i
+                  class="fas fa-clipboard-list"></i></button>
+            </div>
           </div>
-          <div class="text-left">
-            <h6 class="border-dark rounded m-1 mb-0 p-1">{{task.description}}</h6>
-            <button class="btn ml-2 py-0 my-1 border-success text-success" @click="showCommentForm = !showCommentForm"><i
-                class="fas fa-clipboard-list"></i></button>
-          </div>
+          <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i class="fas fa-trash-alt"></i></small></button>
         </div>
-        <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i class="fas fa-trash-alt"></i></small></button>
-      </div>
+      </drag>
+      <drop class="drop" @drop="handleDrop"></drop>
       <div v-show="showEditForm">
         <form @submit.prevent="editTask(task)">
           <input class="rounded pl-1" type="text" v-model="taskDescription" placeholder="task description">
@@ -60,7 +64,8 @@
     },
     props: ['task'],
     components: {
-
+      Drag,
+      Drop
     },
     methods: {
       deleteTask(id, listId) {
@@ -101,10 +106,21 @@
           commentId: commentId
         }
         this.$store.dispatch('deleteComment', data)
+      },
+      handleDrop(data) {
+        console.log(this.task.listId, data)
+        let newData = {
+          newListId: this.task.listId,
+          task: data
+        }
+        this.$store.dispatch('taskDrop', newData)
       }
     }
   };
 </script>
 
 <style>
+  .drop {
+    height: 5px;
+  }
 </style>
