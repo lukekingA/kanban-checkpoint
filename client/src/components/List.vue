@@ -14,7 +14,8 @@
       </div>
       <div v-show="showTaskForm">
         <form class="d-flex align-content-center justify-content-center" @submit.prevent="addTask(listData._id)">
-          <input class="pl-1 rounded" ref="taskForm" type="text" v-model="taskDescription" placeholder="task description" />
+          <input class="pl-1 rounded" ref="taskForm" type="text" v-model="taskDescription"
+            placeholder="task description" />
           <button type="submit" class="btn btn-sm bg-success text-light ml-2">
             Add
           </button>

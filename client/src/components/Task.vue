@@ -1,10 +1,10 @@
 <template>
   <div class="tasks">
 
-    <div>
+    <div :class="taskStyle" class="border-dark border rounded p-1 my-1">
 
       <drag class="drag" :transfer-data="task">
-        <div :class="taskStyle" class="d-flex justify-content-between border-bottom m-2">
+        <div class="d-flex justify-content-between border-bottom m-2">
           <div class="d-flex justify-content-start">
             <div class="">
               <button class="btn ml-0 py-0 my-1 text-success" @click="visComForm"><i
