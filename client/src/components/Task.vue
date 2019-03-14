@@ -14,7 +14,10 @@
               <button class="btn ml-2 py-0 my-1 border-success text-success" @click="visComForm"><i class="fas fa-clipboard-list"></i></button>
             </div>
           </div>
-          <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i class="fas fa-trash-alt"></i></small></button>
+          <div class="">
+            <input type="checkbox" name="completed" :checked="task.completed" @click="taskCompleted(task)">
+            <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i class="fas fa-trash-alt"></i></small></button>
+          </div>
         </div>
       </drag>
       <drop class="drop" @drop="handleDrop"></drop>
@@ -125,6 +128,9 @@
         this.$nextTick(function () {
           this.$refs.editForm.focus()
         })
+      },
+      taskCompleted(task) {
+        this.$store.dispatch('taskCompleted', task)
       }
     }
   };

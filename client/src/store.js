@@ -227,6 +227,17 @@ export default new Vuex.Store({
         dispatch('getLists', newData.task.boardId)
       })
     },
+    taskCompleted({
+      commit,
+      dispatch
+    }, task) {
+      let data = {
+        completed: !task.completed
+      }
+      api.put('tasks/' + task._id, data).then(res => {
+        dispatch('getTasks', task.listId)
+      })
+    },
 
     //#endregion
 
