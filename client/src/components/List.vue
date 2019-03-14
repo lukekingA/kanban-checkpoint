@@ -1,10 +1,12 @@
 <template>
   <div class="h-100 lists col col-sm-3 px-2 mb-2">
     <div class="bg-light h-100 overflow-auto">
-      <div>
-        <button class="btn btn-sm bg-success border-dark text-light mr-2 py-0" @click="visTaskForm">
-          <small>New Task</small>
-        </button>
+      <div class="d-flex justify-content-between">
+        <div>
+          <button class="btn btn-sm bg-success border-dark text-light mt-2 mx-3 py-0" @click="visTaskForm">
+            <small>New Task</small>
+          </button>
+        </div>
         <h5 class="d-inline-block border-bottom pb-1 pt-2">
           {{ listData.title }}
         </h5>
