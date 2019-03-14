@@ -7,10 +7,10 @@
         <div class="d-flex justify-content-between bg-white border-light border-bottom m-2">
           <div class="d-flex justify-content-start">
             <div class="">
-              <button class="btn ml-2 py-0 my-1" @click="visEditForm"><small><i
-                    class="fas fa-edit"></i></small></button>
               <button class="btn ml-0 py-0 my-1 text-success" @click="visComForm"><i
                   class="fas fa-clipboard-list"></i></button>
+              <button class="btn ml-2 py-0 my-1" @click="visEditForm"><small><i
+                    class="fas fa-edit"></i></small></button>
             </div>
             <div class="text-left">
               <h6 class="border-dark rounded m-1 mb-0 p-1">{{task.description}}</h6>
