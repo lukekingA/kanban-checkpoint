@@ -15,7 +15,7 @@
             </div>
           </div>
           <div class="">
-            <input type="checkbox" name="completed" :checked="task.completed" @click="taskCompleted(task)">
+            <input class="btn" type="checkbox" name="completed" :checked="task.completed" @click="taskCompleted(task)">
             <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i class="fas fa-trash-alt"></i></small></button>
           </div>
         </div>
