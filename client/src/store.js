@@ -120,6 +120,13 @@ export default new Vuex.Store({
           commit('setBoards', res.data)
         })
     },
+    getUserBoards({
+      commit, dispatch
+    }, userName) {
+      api.get('boards/' + userName).then(res => {
+        commit('setBoards', res.data)
+      })
+    },
     addBoard({
       commit,
       dispatch
