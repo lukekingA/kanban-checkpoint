@@ -9,7 +9,7 @@
             <div class="">
               <button class="btn ml-0 py-0 my-1 text-success" @click="visComForm"><i
                   class="fas fa-clipboard-list"></i></button>
-              <button class="btn ml-2 py-0 my-1" @click="visEditForm"><small><i
+              <button class="btn ml-0 py-0 my-1" @click="visEditForm"><small><i
                     class="fas fa-edit"></i></small></button>
             </div>
             <div class="text-left">
