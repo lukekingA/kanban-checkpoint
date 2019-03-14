@@ -1,9 +1,9 @@
 <template>
   <div class="h-100 lists col col-sm-3 px-2 mb-2">
     <div class="bg-light h-100 overflow-auto">
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between align-items-baseline">
         <div>
-          <button class="btn btn-sm bg-success border-dark text-light mt-2 mx-3 py-0" @click="visTaskForm">
+          <button class="btn btn-sm bg-success border-dark text-light mx-3 py-0" @click="visTaskForm">
             <small>New Task</small>
           </button>
         </div>
