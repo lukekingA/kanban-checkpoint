@@ -2,8 +2,7 @@
   <div class="login">
     <banner :home="home" :loginpage="loginpage"></banner>
     <div class="page-top-margin">
-      <form class="d-flex align-items-baseline justify-content-center mb-3" v-if="loginForm"
-        @submit.prevent="loginUser">
+      <form class="d-flex align-items-baseline justify-content-center mb-3" v-if="loginForm" @submit.prevent="loginUser">
         <input class="inputWidth pl-1 mr-1 rounded" type="email" v-model="creds.email" placeholder="email">
         <input class="pl-1 ml-1 rounded" type="password" v-model="creds.password" placeholder="password">
         <!-- <button type="submit">Login</button> -->
