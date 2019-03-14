@@ -7,20 +7,24 @@
         <div class="d-flex justify-content-between bg-white border-light border-bottom m-2">
           <div class="d-flex justify-content-start">
             <div class="">
-              <button class="btn ml-2 py-0 my-1" @click="visEditForm"><small><i class="fas fa-edit"></i></small></button>
+              <button class="btn ml-2 py-0 my-1" @click="visEditForm"><small><i
+                    class="fas fa-edit"></i></small></button>
+              <button class="btn ml-0 py-0 my-1 text-success" @click="visComForm"><i
+                  class="fas fa-clipboard-list"></i></button>
             </div>
             <div class="text-left">
               <h6 class="border-dark rounded m-1 mb-0 p-1">{{task.description}}</h6>
-              <button class="btn ml-2 py-0 my-1 border-success text-success" @click="visComForm"><i class="fas fa-clipboard-list"></i></button>
             </div>
           </div>
-          <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i class="fas fa-trash-alt"></i></small></button>
+          <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i
+                class="fas fa-trash-alt"></i></small></button>
         </div>
       </drag>
       <drop class="drop" @drop="handleDrop"></drop>
       <div v-show="showEditForm">
         <form @submit.prevent="editTask(task)">
-          <input class="rounded pl-1" ref="editForm" type="text" v-model="taskDescription" placeholder="task description">
+          <input class="rounded pl-1" ref="editForm" type="text" v-model="taskDescription"
+            placeholder="task description">
         </form>
 
       </div>
@@ -31,9 +35,11 @@
 
       </div>
       <div>
-        <div class="d-flex bg-white rounded shadow-sm justify-content-between ml-5 my-2 mr-2" v-for="comment in task.comments">
+        <div class="d-flex bg-white rounded shadow-sm justify-content-between ml-5 my-2 mr-2"
+          v-for="comment in task.comments">
           <p class="pl-2 py-1 text-left">{{comment.content}}</p>
-          <button class="btn mr-1" @click="deleteComment(task._id, task.listId, comment._id)"><small><i class="fas fa-trash-alt"></i></small></button>
+          <button class="btn mr-1" @click="deleteComment(task._id, task.listId, comment._id)"><small><i
+                class="fas fa-trash-alt"></i></small></button>
         </div>
       </div>
     </div>
