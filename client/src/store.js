@@ -123,8 +123,12 @@ export default new Vuex.Store({
     getUserBoards({
       commit, dispatch
     }, userName) {
+      debugger
       api.get('boards/' + userName).then(res => {
         commit('setBoards', res.data)
+        router.push({
+          name: 'boards'
+        })
       })
     },
     addBoard({
