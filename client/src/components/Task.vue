@@ -35,7 +35,7 @@
       </div>
       <div>
         <div :class="comStyle" class="d-flex rounded shadow-sm justify-content-between ml-5 my-2 mr-2" v-for="comment in task.comments">
-          <p class="pl-2 py-1 text-left">{{comment.content}}</p>
+          <p class="pl-2 py-1 text-left my-1">{{comment.content}}</p>
           <button class="btn mr-1" @click="deleteComment(task._id, task.listId, comment._id)"><small><i class="fas fa-trash-alt"></i></small></button>
         </div>
       </div>
@@ -148,7 +148,7 @@
 
 <style>
   .drop {
-    height: 5px;
+    height: 8px;
   }
 
   .tsk-complete {
