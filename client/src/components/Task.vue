@@ -175,6 +175,6 @@
 
   .dragTarget {
     background-color: rgba(131, 125, 125, 0.15);
-    border: 2px dashed rgba(56, 56, 56, 0.15);
+    border: 1px dotted rgba(56, 56, 56, 0.15);
   }
 </style>
