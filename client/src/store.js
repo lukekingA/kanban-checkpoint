@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 let base = window.location.host.includes('localhost:8080')
   ? '//localhost:3000'
-  : '//heroku.com/kantasktic';
+  : '/';
 
 let auth = Axios.create({
   baseURL: base + 'auth/',
