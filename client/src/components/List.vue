@@ -22,7 +22,7 @@
           </button>
         </form>
       </div>
-      <drop class="drop" @drop="handleDrop"></drop>
+      <drop :class="visDrops ? 'dragTarget' : '' " class="drop rounded" @drop="handleDrop"></drop>
       <task :task="task" v-for="task in tasks" :key="task._id"></task>
     </div>
   </div>
@@ -49,6 +49,9 @@
         let sorted = this.$store.state.activeTasks[this.listData._id] || []
         sorted.sort((a, b) => a.sortVal - b.sortVal)
         return sorted;
+      },
+      visDrops() {
+        return this.$store.state.showDrops
       }
     },
     filters: {
@@ -101,4 +104,7 @@
   };
 </script>
 
-<style scoped></style>
+<style>
+
+
+</style>

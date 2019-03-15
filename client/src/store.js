@@ -23,7 +23,8 @@ export default new Vuex.Store({
     boards: [],
     activeBoard: {},
     activeLists: [],
-    activeTasks: {}
+    activeTasks: {},
+    showDrops: false
   },
   mutations: {
     setUser(state, user) {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
       // })
       //state.activeTasks[data.listId] = data.tasks
       Vue.set(state.activeTasks, data.listId, data.tasks)
+    },
+    showDrops(state) {
+      state.showDrops = !state.showDrops
     }
   },
   actions: {
@@ -267,6 +271,11 @@ export default new Vuex.Store({
 
         dispatch('getTasks', data.listId)
       })
+    },
+    showDrops({
+      commit
+    }) {
+      commit('showDrops')
     }
   }
 })
