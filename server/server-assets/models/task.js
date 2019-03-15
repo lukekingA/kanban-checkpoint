@@ -27,6 +27,11 @@ let task = new Schema({
     required: true,
     default: false
   },
+  sortVal: {
+    type: Number,
+    required: true,
+    default: 0
+  },
   listId: {
     type: ObjectId,
     ref: 'List',

@@ -186,9 +186,19 @@ export default new Vuex.Store({
       dispatch
     }, id) {
       api.get('tasks/lists/' + id).then(res => {
-        commit('getTasks', {
-          listId: id,
-          tasks: res.data
+        res.data.sort((a, b) => a.sortVal - b.sortVal)
+        res.data.forEach((t, i) => {
+          api.put('tasks/' + t._id, {
+            sortVal: i * 2
+          })
+        })
+        return 0
+      }).then(res => {
+        api.get('tasks/lists/' + id).then(res => {
+          commit('getTasks', {
+            listId: id,
+            tasks: res.data
+          })
         })
       })
     },
@@ -221,7 +231,8 @@ export default new Vuex.Store({
       dispatch
     }, newData) {
       let data = {
-        listId: newData.newListId
+        listId: newData.newListId,
+        sortVal: newData.sortVal || 0
       }
       api.put('tasks/' + newData.task._id, data).then(res => {
         dispatch('getLists', newData.task.boardId)

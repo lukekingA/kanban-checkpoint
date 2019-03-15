@@ -46,7 +46,9 @@
     },
     computed: {
       tasks() {
-        return this.$store.state.activeTasks[this.listData._id] || [];
+        let sorted = this.$store.state.activeTasks[this.listData._id] || []
+        sorted.sort((a, b) => a.sortVal - b.sortVal)
+        return sorted;
       }
     },
     filters: {
@@ -67,10 +69,12 @@
         let data = {
           listId: id,
           data: {
+            sortVal: this.tasks.length * 2,
             description: this.taskDescription,
             boardId: this.boardId
           }
         };
+
         this.$store.dispatch("addTask", data);
         this.showTaskForm = false;
         this.taskDescription = "";
