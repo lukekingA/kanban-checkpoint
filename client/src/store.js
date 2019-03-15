@@ -189,7 +189,7 @@ export default new Vuex.Store({
         res.data.sort((a, b) => a.sortVal - b.sortVal)
         res.data.forEach((t, i) => {
           api.put('tasks/' + t._id, {
-            sortVal: i * 2
+            sortVal: (i + 1) * 2
           })
         })
         return 0
