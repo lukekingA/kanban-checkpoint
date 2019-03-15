@@ -4,7 +4,7 @@
     <div :class="taskStyle" class="border-dark border rounded p-1 my-1">
 
       <drag class="drag" :transfer-data="task">
-        <div class="d-flex justify-content-between border-bottom m-2">
+        <div class="d-flex justify-content-between drag border-bottom m-2">
           <div class="d-flex justify-content-start">
             <div class="">
               <button class="btn ml-0 py-0 my-1 text-success" @click="visComForm"><i class="fas fa-clipboard-list"></i></button>
@@ -159,5 +159,9 @@
 
   .tsk2-complete {
     background-color: rgb(187, 180, 216);
+  }
+
+  .drag:hover {
+    cursor: grab;
   }
 </style>
