@@ -8,8 +8,8 @@
     <div class="row">
       <div class="col col-sm-10 offset-sm-1">
         <div class="d-flex justify-content-between">
-          <button v-if="!loginpage" class="btn btn-sm bg-danger text-light" @click="logout">Log Out</button>
-          <router-link v-if="!home" class="btn btn-sm bg-danger text-light px-3" to="/">Back</router-link>
+          <button v-if="!loginpage" class="btn btn-sm bg-danger ml-2 text-light" @click="logout">Log Out</button>
+          <router-link v-if="!home" class="btn btn-sm bg-danger mr-2 text-light px-3" to="/">Back</router-link>
         </div>
       </div>
     </div>
