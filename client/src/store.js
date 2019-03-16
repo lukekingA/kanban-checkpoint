@@ -5,9 +5,9 @@ import router from './router';
 
 Vue.use(Vuex);
 
-let base = window.location.host.includes('localhost:8080')
-  ? '//localhost:3000'
-  : '/';
+let base = window.location.host.includes('localhost:8080') ?
+  'http://localhost:3000/' :
+  '/';
 
 let auth = Axios.create({
   baseURL: base + 'auth/',
@@ -63,7 +63,10 @@ export default new Vuex.Store({
   },
   actions: {
     //#region -- AUTH STUFF --
-    register({ commit, dispatch }, newUser) {
+    register({
+      commit,
+      dispatch
+    }, newUser) {
       auth.post('register', newUser).then(res => {
         commit('setUser', res.data);
         router.push({
@@ -71,7 +74,10 @@ export default new Vuex.Store({
         });
       });
     },
-    authenticate({ commit, dispatch }) {
+    authenticate({
+      commit,
+      dispatch
+    }) {
       auth
         .get('authenticate')
         .then(res => {
@@ -86,7 +92,10 @@ export default new Vuex.Store({
           });
         });
     },
-    login({ commit, dispatch }, creds) {
+    login({
+      commit,
+      dispatch
+    }, creds) {
       auth.post('login', creds).then(res => {
         commit('setUser', res.data);
         router.push({
@@ -94,7 +103,10 @@ export default new Vuex.Store({
         });
       });
     },
-    logout({ commit, dispatch }) {
+    logout({
+      commit,
+      dispatch
+    }) {
       auth.delete('/logout').then(res => {
         commit('logout');
         router.push({
@@ -105,17 +117,26 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- BOARDS --
-    getBoards({ commit, dispatch }) {
+    getBoards({
+      commit,
+      dispatch
+    }) {
       api.get('boards').then(res => {
         commit('setBoards', res.data);
       });
     },
-    addBoard({ commit, dispatch }, boardData) {
+    addBoard({
+      commit,
+      dispatch
+    }, boardData) {
       api.post('boards', boardData).then(serverBoard => {
         dispatch('getBoards');
       });
     },
-    deleteBoard({ commit, dispatch }, boardId) {
+    deleteBoard({
+      commit,
+      dispatch
+    }, boardId) {
       api.delete('boards/' + boardId).then(res => {
         dispatch('getBoards');
       });
@@ -123,7 +144,10 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- LISTS --
-    getLists({ commit, dispatch }, id) {
+    getLists({
+      commit,
+      dispatch
+    }, id) {
       api.get('lists/boards/' + id).then(res => {
         commit('getLists', res.data);
         res.data.forEach(list => {
@@ -131,12 +155,18 @@ export default new Vuex.Store({
         });
       });
     },
-    addList({ commit, dispatch }, data) {
+    addList({
+      commit,
+      dispatch
+    }, data) {
       api.post('lists/boards/' + data.boardId, data.title).then(res => {
         dispatch('getLists', data.boardId);
       });
     },
-    deleteList({ commit, dispatch }, data) {
+    deleteList({
+      commit,
+      dispatch
+    }, data) {
       api.delete('lists/' + data.listId).then(res => {
         dispatch('getLists', data.boardId);
       });
@@ -145,11 +175,16 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- Tasks --
-    clearTasks({ commit }) {
+    clearTasks({
+      commit
+    }) {
       commit('clearTasks');
     },
 
-    getTasks({ commit, dispatch }, id) {
+    getTasks({
+      commit,
+      dispatch
+    }, id) {
       api
         .get('tasks/lists/' + id)
         .then(res => {
@@ -170,22 +205,34 @@ export default new Vuex.Store({
           });
         });
     },
-    addTask({ commit, dispatch }, data) {
+    addTask({
+      commit,
+      dispatch
+    }, data) {
       api.post('tasks/lists/' + data.listId, data.data).then(res => {
         dispatch('getTasks', data.listId);
       });
     },
-    deleteTask({ commit, dispatch }, data) {
+    deleteTask({
+      commit,
+      dispatch
+    }, data) {
       api.delete('tasks/' + data.taskId).then(res => {
         dispatch('getTasks', data.listId);
       });
     },
-    editTask({ commit, dispatch }, data) {
+    editTask({
+      commit,
+      dispatch
+    }, data) {
       api.put('tasks/' + data.taskId, data.description).then(res => {
         dispatch('getTasks', data.listId);
       });
     },
-    taskDrop({ commit, dispatch }, newData) {
+    taskDrop({
+      commit,
+      dispatch
+    }, newData) {
       let data = {
         listId: newData.newListId,
         sortVal: newData.sortVal || 0
@@ -194,7 +241,10 @@ export default new Vuex.Store({
         dispatch('getLists', newData.task.boardId);
       });
     },
-    taskCompleted({ commit, dispatch }, task) {
+    taskCompleted({
+      commit,
+      dispatch
+    }, task) {
       let data = {
         completed: !task.completed
       };
@@ -205,19 +255,26 @@ export default new Vuex.Store({
 
     //#endregion
 
-    addComment({ commit, dispatch }, data) {
+    addComment({
+      commit,
+      dispatch
+    }, data) {
       api.post('tasks/' + data.taskId, data.comment).then(res => {
         dispatch('getTasks', data.listId);
       });
     },
-    deleteComment({ dispatch }, data) {
+    deleteComment({
+      dispatch
+    }, data) {
       api
         .delete('tasks/' + data.taskId + '/comment/' + data.commentId)
         .then(res => {
           dispatch('getTasks', data.listId);
         });
     },
-    showDrops({ commit }) {
+    showDrops({
+      commit
+    }) {
       commit('showDrops');
     }
   }
