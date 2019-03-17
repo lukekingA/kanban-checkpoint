@@ -56,7 +56,7 @@ router.put('/:id', (req, res, next) => {
         console.log(err)
         res.status(400).send('failure to update task')
       }
-      res.send('Successfully updated task')
+      res.status(200).send(req.body)
     })
   }).catch(next)
 
