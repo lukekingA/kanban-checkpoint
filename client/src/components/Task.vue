@@ -4,23 +4,25 @@
     <div :class="taskStyle" class="border-dark border rounded p-1 my-1">
 
       <drag class="drag" :transfer-data="task" v-on:dragstart="showDrops" v-on:dragend="showDrops">
-        <div class="d-flex justify-content-between drag border-bottom m-2">
-          <div class="d-flex justify-content-start">
+        <drop @drop="handleDrop">
+          <div class="d-flex justify-content-between drag border-bottom m-2">
+            <div class="d-flex justify-content-start">
+              <div class="">
+                <button class="btn ml-0 py-0 my-1 text-success" @click="visComForm"><i class="fas fa-clipboard-list"></i></button>
+                <button class="btn ml-0 py-0 my-1" @click="visEditForm"><small><i class="fas fa-pencil-alt"></i></small></button>
+              </div>
+              <div class="text-left">
+                <h6 class="border-dark rounded m-1 mb-0 p-1">{{task.description}}</h6>
+              </div>
+            </div>
             <div class="">
-              <button class="btn ml-0 py-0 my-1 text-success" @click="visComForm"><i class="fas fa-clipboard-list"></i></button>
-              <button class="btn ml-0 py-0 my-1" @click="visEditForm"><small><i class="fas fa-pencil-alt"></i></small></button>
-            </div>
-            <div class="text-left">
-              <h6 class="border-dark rounded m-1 mb-0 p-1">{{task.description}}</h6>
+              <input class="btn" type="checkbox" name="completed" :checked="task.completed" @click="taskCompleted(task)">
+              <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i class="fas fa-trash-alt"></i></small></button>
             </div>
           </div>
-          <div class="">
-            <input class="btn" type="checkbox" name="completed" :checked="task.completed" @click="taskCompleted(task)">
-            <button class="btn  " @click="deleteTask(task._id, task.listId)"><small><i class="fas fa-trash-alt"></i></small></button>
-          </div>
-        </div>
+        </drop>
       </drag>
-      <drop :class="visDrops ? 'dragTarget' : '' " class="drop rounded" @drop="handleDrop"></drop>
+      <!-- <drop :class="visDrops ? 'dragTarget' : '' " class="drop rounded" @drop="handleDrop"></drop> -->
       <div v-show="showEditForm">
         <form @submit.prevent="editTask(task)">
           <input class="rounded pl-1" ref="editForm" type="text" v-model="taskDescription" placeholder="task description">
@@ -128,7 +130,7 @@
       handleDrop(data) {
         let newData = {
           newListId: this.task.listId,
-          sortVal: this.task.sortVal + 1,
+          sortVal: this.task.sortVal - 1,
           task: data
         }
         this.$store.dispatch('taskDrop', newData)
@@ -173,8 +175,8 @@
     cursor: grab;
   }
 
-  .dragTarget {
+  /* .dragTarget {
     background-color: rgba(131, 125, 125, 0.15);
     border: 1px dotted rgba(56, 56, 56, 0.15);
-  }
+  } */
 </style>

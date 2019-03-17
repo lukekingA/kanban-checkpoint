@@ -185,25 +185,12 @@ export default new Vuex.Store({
       commit,
       dispatch
     }, id) {
-      api
-        .get('tasks/lists/' + id)
-        .then(res => {
-          res.data.sort((a, b) => a.sortVal - b.sortVal);
-          res.data.forEach((t, i) => {
-            api.put('tasks/' + t._id, {
-              sortVal: (i + 1) * 2
-            });
-          });
-          return 0;
-        })
-        .then(res => {
-          api.get('tasks/lists/' + id).then(res => {
-            commit('getTasks', {
-              listId: id,
-              tasks: res.data
-            });
-          });
+      api.get('tasks/lists/' + id).then(res => {
+        commit('getTasks', {
+          listId: id,
+          tasks: res.data
         });
+      });
     },
     addTask({
       commit,
@@ -238,9 +225,22 @@ export default new Vuex.Store({
         sortVal: newData.sortVal || 0
       };
       api.put('tasks/' + newData.task._id, data).then(res => {
-        dispatch('getLists', newData.task.boardId);
+        api.get('tasks/lists/' + newData.newListId)
+          .then(res => {
+            res.data.sort((a, b) => a.sortVal - b.sortVal);
+            res.data.forEach((t, i) => {
+              api.put('tasks/' + t._id, {
+                sortVal: (i + 1) * 2
+              }).then(res => {
+                console.log(res)
+                dispatch('getLists', newData.task.boardId);
+              });
+            })
+          })
       });
     },
+
+    // change value on task enabling visual display of task completion
     taskCompleted({
       commit,
       dispatch
