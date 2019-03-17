@@ -3,7 +3,7 @@
 
     <div :class="taskStyle" class="border-dark border rounded p-1 my-1">
 
-      <drag class="drag" :transfer-data="task" v-on:dragstart="showDrops" v-on:dragend="showDrops">
+      <drag class="drag" :transfer-data="task">
         <drop @drop="handleDrop">
           <div class="d-flex justify-content-between drag border-bottom m-2">
             <div class="d-flex justify-content-start">
@@ -22,7 +22,7 @@
           </div>
         </drop>
       </drag>
-      <!-- <drop :class="visDrops ? 'dragTarget' : '' " class="drop rounded" @drop="handleDrop"></drop> -->
+
       <div v-show="showEditForm">
         <form @submit.prevent="editTask(task)">
           <input class="rounded pl-1" ref="editForm" type="text" v-model="taskDescription" placeholder="task description">
@@ -61,8 +61,7 @@
         showEditForm: false,
         taskDescription: '',
         showCommentForm: false,
-        comment: '',
-        dragStart: false
+        comment: ''
       };
     },
     computed: {
@@ -150,9 +149,6 @@
       taskCompleted(task) {
         this.$store.dispatch('taskCompleted', task)
       },
-      showDrops() {
-        this.$store.dispatch('showDrops')
-      }
 
     }
   };
@@ -174,9 +170,4 @@
   .drag:hover {
     cursor: grab;
   }
-
-  /* .dragTarget {
-    background-color: rgba(131, 125, 125, 0.15);
-    border: 1px dotted rgba(56, 56, 56, 0.15);
-  } */
 </style>

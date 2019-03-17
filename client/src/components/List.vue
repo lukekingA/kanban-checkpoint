@@ -1,29 +1,31 @@
 <template>
   <div class="h-100 lists col col-sm-3 px-2 mb-2">
     <div class="bg-light h-100 overflow-auto">
-      <div class="d-flex justify-content-between align-items-baseline">
-        <div>
-          <button class="btn btn-sm bg-success border-dark text-light mx-3 py-0" @click="visTaskForm">
-            <small>New Task</small>
+      <drop @drop="handleDrop">
+        <div class="d-flex justify-content-between align-items-baseline">
+          <div>
+            <button class="btn btn-sm bg-success border-dark text-light mx-3 py-0" @click="visTaskForm">
+              <small>New Task</small>
+            </button>
+          </div>
+          <h5 class="d-inline-block border-bottom pb-1 pt-2">
+            {{ listData.title }}
+          </h5>
+          <button class="btn  " @click="deleteList(listData._id)">
+            <i class="fas fa-trash-alt"></i>
           </button>
         </div>
-        <h5 class="d-inline-block border-bottom pb-1 pt-2">
-          {{ listData.title }}
-        </h5>
-        <button class="btn  " @click="deleteList(listData._id)">
-          <i class="fas fa-trash-alt"></i>
-        </button>
-      </div>
-      <div v-show="showTaskForm">
-        <form class="d-flex align-content-center justify-content-center" @submit.prevent="addTask(listData._id)">
-          <input class="pl-1 rounded" ref="taskForm" type="text" v-model="taskDescription" placeholder="task description" />
-          <button type="submit" class="btn btn-sm bg-success text-light ml-2">
-            Add
-          </button>
-        </form>
-      </div>
-      <drop :class="visDrops ? 'dragTarget' : '' " class="drop rounded" @drop="handleDrop"></drop>
+        <div v-show="showTaskForm">
+          <form class="d-flex align-content-center justify-content-center" @submit.prevent="addTask(listData._id)">
+            <input class="pl-1 rounded" ref="taskForm" type="text" v-model="taskDescription" placeholder="task description" />
+            <button type="submit" class="btn btn-sm bg-success text-light ml-2">
+              Add
+            </button>
+          </form>
+        </div>
+      </drop>
       <task :task="task" v-for="task in tasks" :key="task._id"></task>
+      <drop v-if="tasks.length" class="drop" @drop="handleDropBottom"></drop>
     </div>
   </div>
 </template>
@@ -91,6 +93,14 @@
       handleDrop(data) {
         let newData = {
           newListId: this.listData._id,
+          task: data
+        }
+        this.$store.dispatch('taskDrop', newData)
+      },
+      handleDropBottom(data) {
+        let newData = {
+          newListId: this.listData._id,
+          sortVal: this.tasks.length * 2 + 2,
           task: data
         }
         this.$store.dispatch('taskDrop', newData)
