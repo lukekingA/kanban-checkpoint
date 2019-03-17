@@ -27,8 +27,7 @@ export default new Vuex.Store({
     boards: [],
     activeBoard: {},
     activeLists: [],
-    activeTasks: {},
-    showDrops: false
+    activeTasks: {}
   },
   mutations: {
     setUser(state, user) {
@@ -47,18 +46,7 @@ export default new Vuex.Store({
       state.activeTasks = {};
     },
     getTasks(state, data) {
-      // data.forEach(task => {
-      //   let list = task.listId
-      //   if (!state.activeTasks[list]) {
-      //     state.activeTasks[list] = []
-      //   }
-      //   state.activeTasks[list].push(task)
-      // })
-      //state.activeTasks[data.listId] = data.tasks
       Vue.set(state.activeTasks, data.listId, data.tasks);
-    },
-    showDrops(state) {
-      state.showDrops = !state.showDrops;
     }
   },
   actions: {
@@ -271,11 +259,6 @@ export default new Vuex.Store({
         .then(res => {
           dispatch('getTasks', data.listId);
         });
-    },
-    showDrops({
-      commit
-    }) {
-      commit('showDrops');
     }
   }
 });
